@@ -9,8 +9,8 @@ public class EmployeeQuerySet implements QuerySet<Employee> {
 	
 	private final String selectEmployee = "SELECT * FROM " + DatabaseInformation.employeesTableName + " WHERE id='%s'";
 	
-	private final String insertEmployee = "INSERT into " + DatabaseInformation.employeesTableName + "(id, first_name, last_name, age, departmentId) values ('%1$s', '%2$s', '%3$s', %4$d, '%5$s')";
-	private final String updateEmployee = "UPDATE " + DatabaseInformation.employeesTableName + " SET id = '%1$s', first_name = '%2$s', last_name = '%3$s', age = %4$d, departmentId = '%5$s' WHERE id = '%1$s'";
+	private final String insertEmployee = "INSERT into " + DatabaseInformation.employeesTableName + "(id, firstname, lastname, age, departmentId) values ('%1$s', '%2$s', '%3$s', %4$d, '%5$s')";
+	private final String updateEmployee = "UPDATE " + DatabaseInformation.employeesTableName + " SET id = '%1$s', firstname = '%2$s', lastname = '%3$s', age = %4$d, departmentId = '%5$s' WHERE id = '%1$s'";
 	private final String deleteEmployee = "DELETE FROM " + DatabaseInformation.employeesTableName + " WHERE id = '%s'";
 
 	public String getAllQuery() {
