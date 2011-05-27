@@ -1,0 +1,45 @@
+<?page title="Welcome to the employee demo!" contentType="text/html;charset=UTF-8"?>
+
+<window title="Database Connection Tester" border="normal" apply="org.zkforge.controllers.DatabaseSetupController">
+	<vbox>
+		<hbox>
+			<label value="Hostname/IP" />
+			<textbox id="txtHostname" value="localhost" />	
+		</hbox>
+		<hbox>
+			<label value="Port" />
+			<intbox id="intPort" value="9088" />	
+		</hbox>
+		<hbox>
+			<label value="Database name" />
+			<textbox id="txtDatabaseName" value="employeedb" />	
+		</hbox>
+		<hbox>
+			<label value="Server name" />
+			<textbox id="txtServername" value="svc_drda_2" />	
+		</hbox>
+		<hbox>
+			<label value="Username" />
+			<textbox id="txtUsername" value="informix" />	
+		</hbox>
+		<hbox>
+			<label value="Password" />
+			<textbox id="txtPassword" value="" />	
+		</hbox>
+		<separator />
+		<hbox>
+			<label value="Employees Table Name" />
+			<textbox id="txtEmployeesTableName" value="employees" />	
+		</hbox>
+		<hbox>
+			<label value="Department Table Name" />
+			<textbox id="txtDepartmentTableName" value="departments" />	
+		</hbox>
+		<separator />
+		<hbox>
+			<button label="Check connection" id="btnCheckConnection" />
+			<button label="Create tables" id="btnCreateTables" disabled="true" />
+			<button label="Go to application" id="btnGotoApplication" disabled="true" href="employees.zul" />
+		</hbox>
+	</vbox>
+ </window>
