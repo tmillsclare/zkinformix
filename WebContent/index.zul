@@ -39,7 +39,7 @@
 		<hbox>
 			<button label="Check connection" id="btnCheckConnection" />
 			<button label="Create tables" id="btnCreateTables" disabled="true" />
-			<button label="Go to application" id="btnGotoApplication" disabled="true" href="employees.zul" />
+			<button label="Go to application" id="btnGotoApplication" disabled="true" href="main.zul" />
 		</hbox>
 	</vbox>
  </window>

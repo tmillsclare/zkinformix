@@ -7,9 +7,14 @@ import org.zkforge.dao.sql.QuerySet;
 public class DepartmentDAO extends BaseDAO<Department> {
 	
 	private static final QuerySet<Department> _querySet = new DepartmentQuerySet();
+	private static final DepartmentDAO instance = new DepartmentDAO();
 	
-	public DepartmentDAO() {
-		super(Department.class, _querySet);
+	private DepartmentDAO() {
+		super(Department.class, _querySet, null, null);
+	}
+	
+	public static DepartmentDAO getInstance() {
+		return instance;
 	}
 		
 }

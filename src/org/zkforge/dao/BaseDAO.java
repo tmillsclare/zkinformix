@@ -16,11 +16,16 @@ public abstract class BaseDAO<T> {
 	
 	enum DBACTION { INSERT, UPDATE, DELETE}
 	
-	final ResultSetHandler<List<T>> _listHandler;
-	final ResultSetHandler<T> _beanHandler;
+	ResultSetHandler<List<T>> _listHandler = null;
+	ResultSetHandler<T> _beanHandler = null;
 	final QuerySet<T> _querySet;
 	
 	public BaseDAO(Class<T> baseClass, QuerySet<T> querySet) {
+		this(baseClass, querySet, null, null);
+	}
+	
+	public BaseDAO(Class<T> baseClass, QuerySet<T> querySet, 
+				   ResultSetHandler<List<T>> listHandler, ResultSetHandler<T> beanHandler) {
 		
 		if(baseClass == null) {
 			throw new NullPointerException("baseClass cannot be null");
@@ -30,8 +35,18 @@ public abstract class BaseDAO<T> {
 			throw new NullPointerException("querySet cannot be null");
 		}
 		
-		_listHandler = new BeanListHandler<T>(baseClass);
-		_beanHandler = new BeanHandler<T>(baseClass);
+		if(listHandler == null) {
+			_listHandler = new BeanListHandler<T>(baseClass);
+		} else {
+			_listHandler = listHandler;
+		}
+		
+		if(_beanHandler == null) {
+			_beanHandler = new BeanHandler<T>(baseClass);
+		} else {
+			_beanHandler = beanHandler;
+		}
+		
 		_querySet = querySet;
 		
 		try {
@@ -129,19 +144,7 @@ public abstract class BaseDAO<T> {
 			int rowsUpdated = run.update(conn, sQuery);
 
 			result = (rowsUpdated > 0);
-		} /*catch (SQLException ex) {
-
-			if (ex.getErrorCode() == -692) {
-				try {
-					Messagebox
-							.show("This department still has employees, please move them and then try again");
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-
-			ex.printStackTrace();
-		} */finally {
+		} finally {
 			DbUtils.closeQuietly(conn);
 		}
 

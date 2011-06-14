@@ -6,7 +6,7 @@ public class DatabaseInformation {
 	public static String username = "informix";
 	public static String password = "hellothere";
 	
-	public static String employeesTableName = "tblEmployees";
-	public static String departmentsTableName = "tblDepartments";
+	public static String employeesTableName = "employees";
+	public static String departmentsTableName = "departments";
 	
 }

@@ -33,5 +33,23 @@ public class Department {
 
 	public String getName() {
 		return name;
-	}	
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		boolean equal = false;
+		
+		if(obj instanceof Department) {
+			Department d = (Department)obj;
+			equal = this.id.equals(d.id);
+		}
+		
+		return equal;
+	}
+
+	@Override
+	public int hashCode() {
+		return this.id.hashCode();
+	}
+	
 }

@@ -26,7 +26,7 @@ public class EmployeeQuerySet implements QuerySet<Employee> {
 				object.getFirstName(),
 				object.getLastName(),
 				object.getAge(),
-				object.getDepartmentId());
+				object.getDepartment().getId());
 	}
 
 	public String getUpdateQuery(Employee object) {
@@ -34,7 +34,7 @@ public class EmployeeQuerySet implements QuerySet<Employee> {
 				object.getFirstName(),
 				object.getLastName(),
 				object.getAge(),
-				object.getDepartmentId());
+				object.getDepartment().getId());
 	}
 
 	public String getDeleteQuery(Employee object) {
