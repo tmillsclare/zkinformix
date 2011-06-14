@@ -2,7 +2,7 @@
 
 <?page title="Welcome to the employee demo!" contentType="text/html;charset=UTF-8"?>
 <window id="win"  title="Welcome to the employee demo!" border="normal" apply="org.zkforge.controllers.MainController">
-	<tabbox hflex="true" id="tabs">
+	<tabbox hflex="true" id="tbTabs">
         <tabs>
             <tab label="Employees" />
             <tab label="Departments" />

@@ -3,7 +3,7 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<div id="employeediv" apply="org.zkforge.controllers.EmployeeController" hflex="true">
-		<listbox id="employee_box" multiple="true"  rows="5" model="@{employeediv$composer.getAllEmployees, load-after='addEmployee.onClick, deleteEmployee.onClick, updateEmployee.onClick'}" selectedItem="@{employeediv$composer.currentEmployee}">
+		<listbox id="lstEmployee" multiple="true"  rows="5" model="@{employeediv$composer.getAllEmployees, load-after='btnAddEmployee.onClick, btnDeleteEmployee.onClick, btnUpdateEmployee.onClick'}" selectedItem="@{employeediv$composer.currentEmployee}">
 	   		<auxhead>
 				<auxheader label="Employees" colspan="4"/>
 			</auxhead>
@@ -23,15 +23,15 @@
 	  	
 	  	<groupbox>
 			<caption label="Employee" />
-			First Name: <textbox id="first_name" cols="25" value="@{employeediv$composer.currentEmployee.firstName}" />
-			Last Name: <textbox id="last_name" cols="25" value="@{employeediv$composer.currentEmployee.lastName}" />
-			Age: <intbox id="age" cols="1" value="@{employeediv$composer.currentEmployee.age}" />
-			Department: <listbox id="department" mold="select" model="@{employeediv$composer.getAllDepartments}" selectedItem="@{employeediv$composer.currentEmployee.department}">
+			First Name: <textbox id="txtFirstName" cols="25" value="@{employeediv$composer.currentEmployee.firstName}" />
+			Last Name: <textbox id="txtLastName" cols="25" value="@{employeediv$composer.currentEmployee.lastName}" />
+			Age: <intbox id="intAge" cols="1" value="@{employeediv$composer.currentEmployee.age}" />
+			Department: <listbox id="lstDepartment" mold="select" model="@{employeediv$composer.getAllDepartments}" selectedItem="@{employeediv$composer.currentEmployee.department}">
 							<listitem self="@{each='department'}" label="@{department.name}" />
 						</listbox>
-			<button id="addEmployee" label="Add" width="36px" height="24px"/>
-			<button id="updateEmployee" label="Update" width="46px" height="24px"/>
-			<button id="deleteEmployee" label="Delete" width="46px" height="24px"/>
+			<button id="btnAddEmployee" label="Add" width="36px" height="24px"/>
+			<button id="btnUpdateEmployee" label="Update" width="46px" height="24px"/>
+			<button id="btnDeleteEmployee" label="Delete" width="46px" height="24px"/>
 		</groupbox>
 	</div>
 </zk>

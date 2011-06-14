@@ -3,7 +3,7 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<div id="departmentdiv" apply="org.zkforge.controllers.DepartmentController" hflex="true">
-		<listbox id="department_box" multiple="true"  rows="5" model="@{departmentdiv$composer.getAllDepartments, load-after='addDepartment.onClick, deleteDepartment.onClick, updateDepartment.onClick'}" selectedItem="@{departmentdiv$composer.currentDepartment}">
+		<listbox id="lstDepartment" multiple="true"  rows="5" model="@{departmentdiv$composer.getAllDepartments, load-after='btnAddDepartment.onClick, btnDeleteDepartment.onClick, btnUpdateDepartment.onClick'}" selectedItem="@{departmentdiv$composer.currentDepartment}">
 	  		<auxhead>
 				<auxheader label="Departments" colspan="4"/>
 			</auxhead>
@@ -19,10 +19,10 @@
 	  	
 		<groupbox>
 			<caption label="Department" />
-			Name: <textbox id="department_name" cols="25" value="@{departmentdiv$composer.currentDepartment.name}" />
-			<button id="addDepartment" label="Add" width="36px" height="24px"/>
-			<button id="updateDepartment" label="Update" width="46px" height="24px"/>
-			<button id="deleteDepartment" label="Delete" width="46px" height="24px"/>
+			Name: <textbox id="txtDepartmentName" cols="25" value="@{departmentdiv$composer.currentDepartment.name}" />
+			<button id="btnAddDepartment" label="Add" width="36px" height="24px"/>
+			<button id="btnUpdateDepartment" label="Update" width="46px" height="24px"/>
+			<button id="btnDeleteDepartment" label="Delete" width="46px" height="24px"/>
 		</groupbox>
 	</div>
 </zk>

@@ -13,9 +13,9 @@ public class MainController extends GenericForwardComposer {
 	 */
 	private static final long serialVersionUID = -3135206455666969851L;
 	
-	Tabbox tabs;
+	Tabbox tbTabs;
 
-	public void onSelect$tabs(ForwardEvent e) {
+	public void onSelect$tbTabs(ForwardEvent e) {
 		Object o = e.getOrigin().getTarget();
 		
 		if (o instanceof Tab) {

@@ -2,9 +2,9 @@ package org.zkforge.beans;
 
 public class Employee {
 	
-	private int age = 0;
-	private String id, firstName, lastName = "";
-	private Department department = null;
+	private int _age = 0;
+	private String _id, _firstName, _lastName = "";
+	private Department _department = null;
 	
 	public Employee() {
 		//default constructor for Employee
@@ -16,50 +16,50 @@ public class Employee {
 					int age, 
 					Department department)
 	{
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.age = age;
-		this.department = department;
+		this._id = id;
+		this._firstName = firstName;
+		this._lastName = lastName;
+		this._age = age;
+		this._department = department;
 	}
 	
 	public void setId(String id) {
-		this.id = id;
+		this._id = id;
 	}
 
 	public String getId() {
-		return id;
+		return _id;
 	}
 	
 	public void setFirstName(String first_name) {
-		this.firstName = first_name;
+		this._firstName = first_name;
 	}
 
 	public String getFirstName() {
-		return firstName;
+		return _firstName;
 	}
 
 	public void setLastName(String last_name) {
-		this.lastName = last_name;
+		this._lastName = last_name;
 	}
 
 	public String getLastName() {
-		return lastName;
+		return _lastName;
 	}
 
 	public void setAge(int age) {
-		this.age = age;
+		this._age = age;
 	}
 
 	public int getAge() {
-		return age;
+		return _age;
 	}
 	
 	public void setDepartment(Department department) {
-		this.department = department;
+		this._department = department;
 	}
 
 	public Department getDepartment() {
-		return department;
+		return _department;
 	}
 }

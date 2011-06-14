@@ -24,25 +24,25 @@ public class EmployeeController extends GenericForwardComposer {
 	private static final long serialVersionUID = -8381929527653539158L;
 	
 	
-	EmployeeDAO empDAO = EmployeeDAO.getInstance();
-	DepartmentDAO depDAO = DepartmentDAO.getInstance();
+	EmployeeDAO _empDAO = EmployeeDAO.getInstance();
+	DepartmentDAO _depDAO = DepartmentDAO.getInstance();
 	
-	Employee currentEmployee = null;
-	Department employeeDepartment = null;
+	Employee _currentEmployee = null;
+	Department _employeeDepartment = null;
 	
-	Listbox employee_box;
-	Listbox department;
+	Listbox lstEmployee;
+	Listbox lstDepartment;
 	
 	//text boxes
-	Textbox first_name;
-	Textbox last_name;
+	Textbox txtFirstName;
+	Textbox txtLastName;
 	
 	//int boxes
-	Intbox age;
+	Intbox intAge;
 	
 	public List<Employee> getAllEmployees() {
 		try {
-			return empDAO.getAll();
+			return _empDAO.getAll();
 		} catch (SQLException e) {
 			showError(e.getMessage());
 			e.printStackTrace();
@@ -53,7 +53,7 @@ public class EmployeeController extends GenericForwardComposer {
 	
 	public List<Department> getAllDepartments() {
 		try {
-			return depDAO.getAll();
+			return _depDAO.getAll();
 		} catch (SQLException e) {
 			showError(e.getMessage());
 			e.printStackTrace();
@@ -63,22 +63,22 @@ public class EmployeeController extends GenericForwardComposer {
 	}
 
 	public Employee getCurrentEmployee() {
-		return currentEmployee;
+		return _currentEmployee;
 	}
 	
 	public void setCurrentEmployee(Employee e) {
-		this.currentEmployee = e;
+		this._currentEmployee = e;
 	}	
 	
 	//click events
-	public void onClick$addEmployee() {
-		if(department.getSelectedItem() != null) {
-			String firstName = first_name.getText();
-			String lastName = last_name.getText();
+	public void onClick$btnAddEmployee() {
+		if(lstDepartment.getSelectedItem() != null) {
+			String firstName = txtFirstName.getText();
+			String lastName = txtLastName.getText();
 			Department dep = null;
-			int iAge = Integer.parseInt(age.getText());
+			int iAge = Integer.parseInt(intAge.getText());
 			
-			Selectable selectable = (Selectable)department.getModel();
+			Selectable selectable = (Selectable)lstDepartment.getModel();
 			Set<?> selectedSet = selectable.getSelection();
 			
 			if (selectedSet.size() == 1) {
@@ -92,7 +92,7 @@ public class EmployeeController extends GenericForwardComposer {
 									  dep);
 			
 			try {
-				empDAO.insert(e);
+				_empDAO.insert(e);
 			} catch (SQLException e1) {
 				showError(e1.getMessage());
 				e1.printStackTrace();
@@ -104,14 +104,14 @@ public class EmployeeController extends GenericForwardComposer {
 			 
 	}
 	
-	public void onClick$updateEmployee() {
-		if((department.getSelectedItem() != null)
-			&& (employee_box.getSelectedItem() != null)) {
+	public void onClick$btnUpdateEmployee() {
+		if((lstDepartment.getSelectedItem() != null)
+			&& (lstEmployee.getSelectedItem() != null)) {
 			
-			Employee e = (Employee)(employee_box.getSelectedItem().getValue());
+			Employee e = (Employee)(lstEmployee.getSelectedItem().getValue());
 			
 			try {
-				empDAO.update(e);
+				_empDAO.update(e);
 			} catch (SQLException e1) {
 				showError(e1.getMessage());
 				e1.printStackTrace();
@@ -122,25 +122,15 @@ public class EmployeeController extends GenericForwardComposer {
 		} 
 	}
 	
-	public void onClick$deleteEmployee() {
+	public void onClick$btnDeleteEmployee() {
 		
-		if(employee_box.getSelectedItem() != null) {
-			Employee e = (Employee)(employee_box.getSelectedItem().getValue());
+		if(lstEmployee.getSelectedItem() != null) {
+			Employee e = (Employee)(lstEmployee.getSelectedItem().getValue());
 			
 			
 			try {
-				empDAO.delete(e);
+				_empDAO.delete(e);
 			} catch (SQLException e1) {
-				
-				if (e1.getErrorCode() == -692) {
-					try {
-						Messagebox
-								.show("This department still has employees, please move them and then try again");
-					} catch (InterruptedException e2) {
-						e2.printStackTrace();
-					}
-				}
-				
 				showError(e1.getMessage());
 				e1.printStackTrace();
 			}

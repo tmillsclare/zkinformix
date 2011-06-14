@@ -18,22 +18,22 @@ public class DepartmentController extends GenericForwardComposer {
 	 */
 	private static final long serialVersionUID = -8365047481595108194L;
 	
-	DepartmentDAO depDAO = DepartmentDAO.getInstance();
-	Department currentDepartment = null;
-	Textbox department_name;
-	Listbox department_box;
+	DepartmentDAO _depDAO = DepartmentDAO.getInstance();
+	Department _currentDepartment = null;
+	Textbox txtDepartmentName;
+	Listbox lstDepartment;
 	
 	public void setCurrentDepartment(Department d) {
-		this.currentDepartment = d;		
+		this._currentDepartment = d;		
 	}
 	
 	public Department getCurrentDepartment() {
-		return currentDepartment;
+		return _currentDepartment;
 	}
 	
 	public List<Department> getAllDepartments() {
 		try {
-			return depDAO.getAll();
+			return _depDAO.getAll();
 		} catch (SQLException e) {
 			showError(e.getMessage());
 			e.printStackTrace();
@@ -42,16 +42,16 @@ public class DepartmentController extends GenericForwardComposer {
 		return null;
 	}
 	
-	public void onClick$addDepartment() {
+	public void onClick$btnAddDepartment() {
 		
-		String departmentName = department_name.getText();
+		String departmentName = txtDepartmentName.getText();
 		
 		if(!departmentName.equals("")) {
 			Department d = new Department(departmentName + UUID.randomUUID(), //id
 										  departmentName);
 			
 			try {
-				depDAO.insert(d);
+				_depDAO.insert(d);
 			} catch (SQLException e) {
 				showError(e.getMessage());
 				e.printStackTrace();
@@ -62,11 +62,11 @@ public class DepartmentController extends GenericForwardComposer {
 		}
 	}
 	
-	public void onClick$updateDepartment() {
-		if((department_box.getSelectedItem() != null)) {
-			Department d = (Department)(department_box.getSelectedItem().getValue());			
+	public void onClick$btnUpdateDepartment() {
+		if((lstDepartment.getSelectedItem() != null)) {
+			Department d = (Department)(lstDepartment.getSelectedItem().getValue());			
 			try {
-				depDAO.update(d);
+				_depDAO.update(d);
 			} catch (SQLException e) {
 				showError(e.getMessage());
 				e.printStackTrace();
@@ -77,14 +77,23 @@ public class DepartmentController extends GenericForwardComposer {
 		}
 	}
 	
-	public void onClick$deleteDepartment() {
-		if(department_box.getSelectedItem() != null) {
-			Department d = (Department)(department_box.getSelectedItem().getValue());
+	public void onClick$btnDeleteDepartment() {
+		if(lstDepartment.getSelectedItem() != null) {
+			Department d = (Department)(lstDepartment.getSelectedItem().getValue());
 			
 			try {
-				depDAO.delete(d);
+				_depDAO.delete(d);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				
+				if (e.getErrorCode() == -692) {
+					try {
+						Messagebox
+								.show("This department still has employees, please move them and then try again");
+					} catch (InterruptedException e2) {
+						e2.printStackTrace();
+					}
+				}
+				
 				e.printStackTrace();
 			}
 		}
