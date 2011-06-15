@@ -9,10 +9,10 @@
         </tabs>
         <tabpanels>
         	<tabpanel>
-        		<include mode="defer" src="/macro/employees.zul" />
+        		<include mode="defer" src="/module/employees.zul" />
         	</tabpanel>
         	<tabpanel>
-        		<include mode="defer" src="/macro/departments.zul" />
+        		<include mode="defer" src="/module/departments.zul" />
         	</tabpanel>
         </tabpanels>
     </tabbox>
