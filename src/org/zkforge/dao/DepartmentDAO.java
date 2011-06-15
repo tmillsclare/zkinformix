@@ -4,7 +4,7 @@ import org.zkforge.beans.Department;
 import org.zkforge.dao.sql.DepartmentQuerySet;
 import org.zkforge.dao.sql.QuerySet;
 
-public class DepartmentDAO extends BaseDAO<Department> {
+public class DepartmentDAO extends AbstractDAO<Department> {
 	
 	private static final QuerySet<Department> _querySet = new DepartmentQuerySet();
 	private static final DepartmentDAO instance = new DepartmentDAO();

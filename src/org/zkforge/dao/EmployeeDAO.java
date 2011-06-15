@@ -12,7 +12,7 @@ import org.zkforge.beans.Employee;
 import org.zkforge.dao.sql.EmployeeQuerySet;
 import org.zkforge.dao.sql.QuerySet;
 
-public class EmployeeDAO extends BaseDAO<Employee> {
+public class EmployeeDAO extends AbstractDAO<Employee> {
 
 	private static final QuerySet<Employee> _querySet = new EmployeeQuerySet();
 	private static final EmployeeDAO _instance = new EmployeeDAO();	

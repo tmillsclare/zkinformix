@@ -12,7 +12,7 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.zkforge.dao.sql.QuerySet;
 
-public abstract class BaseDAO<T> {
+public abstract class AbstractDAO<T> {
 	
 	enum DBACTION { INSERT, UPDATE, DELETE}
 	
@@ -20,11 +20,11 @@ public abstract class BaseDAO<T> {
 	ResultSetHandler<T> _beanHandler = null;
 	final QuerySet<T> _querySet;
 	
-	public BaseDAO(Class<T> baseClass, QuerySet<T> querySet) {
+	public AbstractDAO(Class<T> baseClass, QuerySet<T> querySet) {
 		this(baseClass, querySet, null, null);
 	}
 	
-	public BaseDAO(Class<T> baseClass, QuerySet<T> querySet, 
+	public AbstractDAO(Class<T> baseClass, QuerySet<T> querySet, 
 				   ResultSetHandler<List<T>> listHandler, ResultSetHandler<T> beanHandler) {
 		
 		if(baseClass == null) {
