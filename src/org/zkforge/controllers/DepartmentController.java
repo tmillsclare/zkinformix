@@ -93,11 +93,11 @@ public class DepartmentController extends GenericForwardComposer {
 				
 				if (e.getErrorCode() == -692) {
 					UiUtils.showMessage("This department still has employees, please move them and then try again");
+				} else {
+					final String error = e.getMessage();
+					UiUtils.showMessage(error);
+					log.error(error);
 				}
-				
-				final String error = e.getMessage();
-				UiUtils.showMessage(error);
-				log.error(error);
 			}
 		}
 		else {
