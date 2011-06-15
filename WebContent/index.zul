@@ -1,0 +1,12 @@
+<?page title="Welcome to the employee demo!" contentType="text/html;charset=UTF-8"?>
+
+<zk>
+	<vlayout>
+		<hlayout>
+			To setup your database connections please use the <a href="console.zul">console</a>
+		</hlayout>
+		<hlayout>
+			To proceed to the web application please <a href="main.zul">click here</a>
+		</hlayout>
+	</vlayout>
+</zk>
