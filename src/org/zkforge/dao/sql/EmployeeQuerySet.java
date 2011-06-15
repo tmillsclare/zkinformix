@@ -4,25 +4,17 @@ import org.zkforge.beans.Employee;
 import org.zkforge.dao.DatabaseInformation;
 
 public class EmployeeQuerySet implements QuerySet<Employee> {
-	
-	private final String _selectAllEmployees = "SELECT * FROM %1s";
-	
-	private final String _selectEmployee = "SELECT * FROM %1s WHERE id='%2s'";
-	
-	private final String _insertEmployee = "INSERT into %1s(id, firstname, lastname, age, departmentId) values ('%2$s', '%3$s', '%4$s', %5$d, '%6$s')";
-	private final String _updateEmployee = "UPDATE %1s SET id = '%2$s', firstname = '%3$s', lastname = '%4$s', age = %5$d, departmentId = '%6$s' WHERE id = '%2$s'";
-	private final String _deleteEmployee = "DELETE FROM %1s WHERE id = '%2s'";
 
 	public String getAllQuery() {
-		return String.format(_selectAllEmployees, getTableName());
+		return String.format(SqlPropertyLoader.getQuery("selectAllEmployees"), getTableName());
 	}
 
 	public String getQuery(String id) {
-		return String.format(_selectEmployee, getTableName(), id);
+		return String.format(SqlPropertyLoader.getQuery("selectEmployee"), getTableName(), id);
 	}
 
 	public String getInsertQuery(Employee object) {
-		return String.format(_insertEmployee, getTableName(), 
+		return String.format(SqlPropertyLoader.getQuery("insertEmployee"), getTableName(), 
 				object.getId(),
 				object.getFirstName(),
 				object.getLastName(),
@@ -31,7 +23,7 @@ public class EmployeeQuerySet implements QuerySet<Employee> {
 	}
 
 	public String getUpdateQuery(Employee object) {
-		return String.format(_updateEmployee, getTableName(), 
+		return String.format(SqlPropertyLoader.getQuery("updateEmployee"), getTableName(), 
 				object.getId(),
 				object.getFirstName(),
 				object.getLastName(),
@@ -40,7 +32,7 @@ public class EmployeeQuerySet implements QuerySet<Employee> {
 	}
 
 	public String getDeleteQuery(Employee object) {
-		return String.format(_deleteEmployee, getTableName(), 
+		return String.format(SqlPropertyLoader.getQuery("deleteEmployee"), getTableName(), 
 				object.getId());
 	}
 
