@@ -6,9 +6,10 @@ import java.util.UUID;
 
 import org.zkforge.beans.Department;
 import org.zkforge.dao.DepartmentDAO;
+import org.zkforge.utils.UiUtils;
+import org.zkoss.util.logging.Log;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
 public class DepartmentController extends GenericForwardComposer {
@@ -17,6 +18,8 @@ public class DepartmentController extends GenericForwardComposer {
 	 * 
 	 */
 	private static final long serialVersionUID = -8365047481595108194L;
+	
+	private static final Log log = Log.lookup(DepartmentController.class);
 	
 	DepartmentDAO _depDAO = DepartmentDAO.getInstance();
 	Department _currentDepartment = null;
@@ -35,8 +38,9 @@ public class DepartmentController extends GenericForwardComposer {
 		try {
 			return _depDAO.getAll();
 		} catch (SQLException e) {
-			showError(e.getMessage());
-			e.printStackTrace();
+			final String error = e.getMessage();
+			UiUtils.showMessage(error);
+			log.error(error);
 		}
 		
 		return null;
@@ -53,12 +57,13 @@ public class DepartmentController extends GenericForwardComposer {
 			try {
 				_depDAO.insert(d);
 			} catch (SQLException e) {
-				showError(e.getMessage());
-				e.printStackTrace();
+				final String error = e.getMessage();
+				UiUtils.showMessage(error);
+				log.error(error);
 			}
 		}
 		else {
-			showError("Please enter a name!");
+			UiUtils.showMessage("Please enter a name!");
 		}
 	}
 	
@@ -68,12 +73,13 @@ public class DepartmentController extends GenericForwardComposer {
 			try {
 				_depDAO.update(d);
 			} catch (SQLException e) {
-				showError(e.getMessage());
-				e.printStackTrace();
+				final String error = e.getMessage();
+				UiUtils.showMessage(error);
+				log.error(error);
 			}
 		}
 		else {
-			showError("Please select an employee and department!");
+			UiUtils.showMessage("Please select an employee and department!");
 		}
 	}
 	
@@ -86,27 +92,17 @@ public class DepartmentController extends GenericForwardComposer {
 			} catch (SQLException e) {
 				
 				if (e.getErrorCode() == -692) {
-					try {
-						Messagebox
-								.show("This department still has employees, please move them and then try again");
-					} catch (InterruptedException e2) {
-						e2.printStackTrace();
-					}
+					UiUtils.showMessage("This department still has employees, please move them and then try again");
 				}
 				
-				e.printStackTrace();
+				final String error = e.getMessage();
+				UiUtils.showMessage(error);
+				log.error(error);
 			}
 		}
 		else {
-			showError("Please select a department!");
+			UiUtils.showMessage("Please select a department!");
 		}
 	}
 	
-	private void showError(String message) {
-		try {
-			Messagebox.show(message);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
 }

@@ -9,10 +9,11 @@ import org.zkforge.beans.Department;
 import org.zkforge.beans.Employee;
 import org.zkforge.dao.DepartmentDAO;
 import org.zkforge.dao.EmployeeDAO;
+import org.zkforge.utils.UiUtils;
+import org.zkoss.util.logging.Log;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.ext.Selectable;
 
@@ -22,6 +23,8 @@ public class EmployeeController extends GenericForwardComposer {
 	 * 
 	 */
 	private static final long serialVersionUID = -8381929527653539158L;
+	
+	private static final Log log = Log.lookup(EmployeeController.class);
 	
 	
 	EmployeeDAO _empDAO = EmployeeDAO.getInstance();
@@ -44,8 +47,9 @@ public class EmployeeController extends GenericForwardComposer {
 		try {
 			return _empDAO.getAll();
 		} catch (SQLException e) {
-			showError(e.getMessage());
-			e.printStackTrace();
+			final String error = e.getMessage();
+			UiUtils.showMessage(error);
+			log.error(error);
 		}
 		
 		return null;
@@ -55,8 +59,9 @@ public class EmployeeController extends GenericForwardComposer {
 		try {
 			return _depDAO.getAll();
 		} catch (SQLException e) {
-			showError(e.getMessage());
-			e.printStackTrace();
+			final String error = e.getMessage();
+			UiUtils.showMessage(error);
+			log.error(error);
 		}
 		
 		return null;
@@ -85,21 +90,22 @@ public class EmployeeController extends GenericForwardComposer {
 				dep = (Department)selectedSet.toArray()[0];
 			}
 			
-			Employee e = new Employee(firstName + lastName + UUID.randomUUID(), //id
+			Employee employee = new Employee(firstName + lastName + UUID.randomUUID(), //id
 									  firstName,
 									  lastName,
 									  iAge,
 									  dep);
 			
 			try {
-				_empDAO.insert(e);
-			} catch (SQLException e1) {
-				showError(e1.getMessage());
-				e1.printStackTrace();
+				_empDAO.insert(employee);
+			} catch (SQLException e) {
+				final String error = e.getMessage();
+				UiUtils.showMessage(error);
+				log.error(error);
 			}
 		}
 		else {
-			showError("Please select a department!");
+			UiUtils.showMessage("Please select a department!");
 		}
 			 
 	}
@@ -108,45 +114,38 @@ public class EmployeeController extends GenericForwardComposer {
 		if((lstDepartment.getSelectedItem() != null)
 			&& (lstEmployee.getSelectedItem() != null)) {
 			
-			Employee e = (Employee)(lstEmployee.getSelectedItem().getValue());
+			Employee employee = (Employee)(lstEmployee.getSelectedItem().getValue());
 			
 			try {
-				_empDAO.update(e);
-			} catch (SQLException e1) {
-				showError(e1.getMessage());
-				e1.printStackTrace();
+				_empDAO.update(employee);
+			} catch (SQLException e) {
+				final String error = e.getMessage();
+				UiUtils.showMessage(error);
+				log.error(error);
 			}
 		}
 		else {
-			showError("Please select an employee and department!");
+			UiUtils.showMessage("Please select an employee and department!");
 		} 
 	}
 	
 	public void onClick$btnDeleteEmployee() {
 		
 		if(lstEmployee.getSelectedItem() != null) {
-			Employee e = (Employee)(lstEmployee.getSelectedItem().getValue());
-			
+			Employee employee = (Employee)(lstEmployee.getSelectedItem().getValue());
 			
 			try {
-				_empDAO.delete(e);
-			} catch (SQLException e1) {
-				showError(e1.getMessage());
-				e1.printStackTrace();
+				_empDAO.delete(employee);
+			} catch (SQLException e) {
+				final String error = e.getMessage();
+				UiUtils.showMessage(error);
+				log.error(error);
 			}
 		}
 		else {
-			showError("Please select an employee!");
+			UiUtils.showMessage("Please select an employee!");
 		}
 			 
-	}
-	
-	private void showError(String message) {
-		try {
-			Messagebox.show(message);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 	}
 	
 }

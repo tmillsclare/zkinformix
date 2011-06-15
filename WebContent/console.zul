@@ -1,0 +1,46 @@
+<?page title="Welcome to the employee demo!" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+
+<window title="Database Connection Tester" id="connection" border="normal" apply="org.zkforge.controllers.DatabaseSetupController">
+	<vbox>
+		<hbox>
+			<label value="Hostname/IP" />
+			<textbox id="txtHostname" value="@{connection$composer.databaseInformation.hostname }" />	
+		</hbox>
+		<hbox>
+			<label value="Port" />
+			<intbox id="intPort" value="@{connection$composer.databaseInformation.port}" />	
+		</hbox>
+		<hbox>
+			<label value="Database name" />
+			<textbox id="txtDatabaseName" value="@{connection$composer.databaseInformation.databaseName }" />	
+		</hbox>
+		<hbox>
+			<label value="Server name" />
+			<textbox id="txtServername" value="@{connection$composer.databaseInformation.serverName }" />	
+		</hbox>
+		<hbox>
+			<label value="Username" />
+			<textbox id="txtUsername" value="@{connection$composer.databaseInformation.username}" />	
+		</hbox>
+		<hbox>
+			<label value="Password" />
+			<textbox id="txtPassword" value="@{connection$composer.databaseInformation.password}" />	
+		</hbox>
+		<separator />
+		<hbox>
+			<label value="Employees Table Name" />
+			<textbox id="txtEmployeesTableName" value="@{connection$composer.databaseInformation.employeesTableName}" />	
+		</hbox>
+		<hbox>
+			<label value="Department Table Name" />
+			<textbox id="txtDepartmentTableName" value="@{connection$composer.databaseInformation.departmentsTableName}" />	
+		</hbox>
+		<separator />
+		<hbox>
+			<button label="Check connection" id="btnCheckConnection" />
+			<button label="Create tables" id="btnCreateTables" disabled="true" />
+			<button label="Go to application" id="btnGotoApplication" disabled="true" href="main.zul" />
+		</hbox>
+	</vbox>
+ </window>

@@ -48,12 +48,6 @@ public abstract class AbstractDAO<T> {
 		}
 		
 		_querySet = querySet;
-		
-		try {
-			Class.forName("com.informix.jdbc.IfxDriver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	public List<T> getAll() throws SQLException {
@@ -62,8 +56,9 @@ public abstract class AbstractDAO<T> {
 		List<T> allDepartments = null;
 
 		try {
-			conn = DriverManager.getConnection(DatabaseInformation.url,
-					DatabaseInformation.username, DatabaseInformation.password);
+			conn = DriverManager.getConnection(DatabaseInformation.getInstance().getUrl(),
+											   DatabaseInformation.getInstance().getUsername(), 
+											   DatabaseInformation.getInstance().getPassword());
 
 			allDepartments = run.query(conn, _querySet.getAllQuery(), _listHandler);
 
@@ -82,8 +77,9 @@ public abstract class AbstractDAO<T> {
 		
 		try {
 			// get connection
-			conn = DriverManager.getConnection(DatabaseInformation.url,
-					DatabaseInformation.username, DatabaseInformation.password);
+			conn = DriverManager.getConnection(DatabaseInformation.getInstance().getUrl(),
+											   DatabaseInformation.getInstance().getUsername(), 
+											   DatabaseInformation.getInstance().getPassword());
 			
 			object = run.query(conn, _querySet.getQuery(id), _beanHandler);
 
@@ -138,8 +134,9 @@ public abstract class AbstractDAO<T> {
 				throw new SQLException("No database action specified");
 			}
 
-			conn = DriverManager.getConnection(DatabaseInformation.url,
-					DatabaseInformation.username, DatabaseInformation.password);
+			conn = DriverManager.getConnection(DatabaseInformation.getInstance().getUrl(),
+											   DatabaseInformation.getInstance().getUsername(), 
+											   DatabaseInformation.getInstance().getPassword());
 
 			int rowsUpdated = run.update(conn, sQuery);
 
