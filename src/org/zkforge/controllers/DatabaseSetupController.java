@@ -31,9 +31,8 @@ public class DatabaseSetupController extends GenericForwardComposer {
 			createConnection();
 			UiUtils.showMessage("Connection successful");
 		} catch (SQLException e) {
-			final String error = ErrorUtils.formatError(ErrorUtils.CREATE_CONNECTION, e);
-			UiUtils.showMessage(error);
-			log.error(error);
+			UiUtils.showMessage(ErrorUtils.CREATE_CONNECTION);
+			log.error(ErrorUtils.CREATE_CONNECTION, e);
 		} 
 	}
 	
@@ -42,9 +41,8 @@ public class DatabaseSetupController extends GenericForwardComposer {
 			DatabaseUtils.createTables();
 			UiUtils.showMessage("Tables created successfully, please proceed to the application");
 		} catch (SQLException e) {
-			final String error = ErrorUtils.formatError(ErrorUtils.CREATE_TABLES, e);
-			UiUtils.showMessage(error);
-			log.error(error);
+			UiUtils.showMessage(ErrorUtils.CREATE_TABLES);
+			log.error(ErrorUtils.CREATE_TABLES, e);
 		}
 	}
 	

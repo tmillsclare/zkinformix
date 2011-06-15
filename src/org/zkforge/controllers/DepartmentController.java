@@ -38,9 +38,8 @@ public class DepartmentController extends GenericForwardComposer {
 		try {
 			return _depDAO.getAll();
 		} catch (SQLException e) {
-			final String error = e.getMessage();
-			UiUtils.showMessage(error);
-			log.error(error);
+			UiUtils.showMessage(e.getMessage());
+			log.error(e);
 		}
 		
 		return null;
@@ -57,9 +56,8 @@ public class DepartmentController extends GenericForwardComposer {
 			try {
 				_depDAO.insert(d);
 			} catch (SQLException e) {
-				final String error = e.getMessage();
-				UiUtils.showMessage(error);
-				log.error(error);
+				UiUtils.showMessage(e.getMessage());
+				log.error(e);
 			}
 		}
 		else {
@@ -73,9 +71,8 @@ public class DepartmentController extends GenericForwardComposer {
 			try {
 				_depDAO.update(d);
 			} catch (SQLException e) {
-				final String error = e.getMessage();
-				UiUtils.showMessage(error);
-				log.error(error);
+				UiUtils.showMessage(e.getMessage());
+				log.error(e);
 			}
 		}
 		else {
@@ -94,9 +91,8 @@ public class DepartmentController extends GenericForwardComposer {
 				if (e.getErrorCode() == -692) {
 					UiUtils.showMessage("This department still has employees, please move them and then try again");
 				} else {
-					final String error = e.getMessage();
-					UiUtils.showMessage(error);
-					log.error(error);
+					UiUtils.showMessage(e.getMessage());
+					log.error(e);
 				}
 			}
 		}

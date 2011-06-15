@@ -47,9 +47,8 @@ public class EmployeeController extends GenericForwardComposer {
 		try {
 			return _empDAO.getAll();
 		} catch (SQLException e) {
-			final String error = e.getMessage();
-			UiUtils.showMessage(error);
-			log.error(error);
+			UiUtils.showMessage(e.getMessage());
+			log.error(e);
 		}
 		
 		return null;
@@ -59,9 +58,8 @@ public class EmployeeController extends GenericForwardComposer {
 		try {
 			return _depDAO.getAll();
 		} catch (SQLException e) {
-			final String error = e.getMessage();
-			UiUtils.showMessage(error);
-			log.error(error);
+			UiUtils.showMessage(e.getMessage());
+			log.error(e);
 		}
 		
 		return null;
@@ -99,9 +97,8 @@ public class EmployeeController extends GenericForwardComposer {
 			try {
 				_empDAO.insert(employee);
 			} catch (SQLException e) {
-				final String error = e.getMessage();
-				UiUtils.showMessage(error);
-				log.error(error);
+				UiUtils.showMessage(e.getMessage());
+				log.error(e);
 			}
 		}
 		else {
@@ -119,9 +116,8 @@ public class EmployeeController extends GenericForwardComposer {
 			try {
 				_empDAO.update(employee);
 			} catch (SQLException e) {
-				final String error = e.getMessage();
-				UiUtils.showMessage(error);
-				log.error(error);
+				UiUtils.showMessage(e.getMessage());
+				log.error(e);
 			}
 		}
 		else {
@@ -137,9 +133,8 @@ public class EmployeeController extends GenericForwardComposer {
 			try {
 				_empDAO.delete(employee);
 			} catch (SQLException e) {
-				final String error = e.getMessage();
-				UiUtils.showMessage(error);
-				log.error(error);
+				UiUtils.showMessage(e.getMessage());
+				log.error(e);
 			}
 		}
 		else {
